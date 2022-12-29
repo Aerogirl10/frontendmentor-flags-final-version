@@ -1,0 +1,156 @@
+@use "vars";
+@use "default.css";
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=Nunito+Sans:wght@300;600;800&display=swap');
+
+.flex
+{
+  display: flex;
+}
+
+body
+{
+  background-color: vars.$dark-mode-bkg;
+  font-family: 'Inter', sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
+  color: vars.$dark-txt-light-elems;
+}
+
+header
+{
+  background-color: vars.$dark-mode-elements;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+
+  & > span
+  {
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+  & button
+  {
+    background-color: transparent;
+    border: none;
+    color: vars.$dark-txt-light-elems;
+
+    & > i
+    {
+      margin-right: 10px;
+    }
+  }
+}
+
+#main
+{
+  padding: 40px;
+
+  & .flex
+  {
+    justify-content: space-between;
+
+    & .input-group
+    {
+      position: relative;
+
+      & i
+      {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        height: fit-content;
+        margin: auto;
+        left: 25px;
+      }
+
+      & input
+      {
+        background-color: vars.$dark-mode-elements;
+        border: none;
+        padding: 10px 10px 10px 60px;
+
+        @media (min-width: vars.$desktop)
+        {
+          min-width: 30vw;
+
+        }
+
+      }
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: vars.$dark-mode-bkg;
+      color: vars.$dark-txt-light-elems;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+      padding: 0;
+
+      & > li
+      {
+        list-style: none;
+        padding: 10px 15px;
+        &:hover
+        {
+          background-color: vars.$dark-mode-elements;
+        }
+      }
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+  }
+}
+
+
+#flag-list
+{
+  display: grid;
+  gap: 40px;
+  margin: 40px auto 0;
+  max-width: 1800px;
+
+  & .flag-item
+  {
+
+    background-color: vars.$dark-mode-elements;
+
+    & .flag
+    {
+
+      & picture
+      {
+        max-width: 100%;
+        min-height: 240px;
+        width: auto;
+
+        & > img
+        {
+          width: 100%;
+          object-fit: cover;
+          min-height: 240px;
+        }
+      }
+    }
+
+    & .info
+    {
+      padding: 25px;
+    }
+
+  }
+
+  @media (min-width: vars.$desktop)
+  {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
