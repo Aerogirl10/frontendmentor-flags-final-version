@@ -4,8 +4,9 @@ import FlagList from "./FlagList";
 import ReactDOM from 'react-dom/client';
 import FilterRegion from "./FilterRegion";
 
-let regions = null;
-let flags = null;
+// let regions = null;
+// let flags = null;
+// let newFlags = [];
 // const domContainer1 = document.querySelector('#flag-list-container');
 const domFilterContainer = document.querySelector('#region-filter');
 
@@ -22,9 +23,10 @@ export default class App extends React.Component {
 
 
         this.state = {
-            items: [],
+            items: [], // all items
             DataisLoaded: false,
-            // region: this.props.region
+            flags: [], //only after search
+            regions: []
         };
     }
 
@@ -39,14 +41,7 @@ export default class App extends React.Component {
                 this.setState({
                     items: json,
                     DataisLoaded: true,
-
                 });
-
-//
-//                 const root1 = ReactDOM.createRoot(domContainer1);
-// // root.render(<ShoppingList name="Mark"></ShoppingList>);
-//                 root1.render(<FlagList flags={json}/>);
-
 
                 //todo: kraje niepotrzebne
                 /*this.regions = json.reduce((countries, {continents}) => {
@@ -56,8 +51,13 @@ export default class App extends React.Component {
                 }, {});
                 console.log(this.regions);*/
 
-                flags = json;
-                regions = json.map(e => e['region'])
+                if (this.state.flags.length === 0) {
+                    console.log("nie ma flag");
+                    this.setState({
+                        flags: json,
+                    })
+                }
+                let regionsNew = json.map(e => e['region'])
 
                     // store the keys of the unique objects
                     .map((e, i, final) => final.indexOf(e) === i && i)
@@ -65,8 +65,11 @@ export default class App extends React.Component {
                     // eliminate the dead keys & store unique objects
                     .filter(e => json[e]).map(e => json[e]['region']);
 
-                console.log(flags);
-                console.log(regions);
+                this.setState({
+                    regions: regionsNew
+                });
+                console.log(this.state.flags);
+                console.log(this.state.regions);
 //
 //
 //                 const filterRoot = ReactDOM.createRoot(domFilterContainer);
@@ -76,9 +79,45 @@ export default class App extends React.Component {
             })
     }
 
-    selRegion(region) {
+
+    setFlags(newFlags) {
+        this.setState({flags: newFlags});
+    }
+
+    selRegion(allItems, region) {
         console.log('UPDATE COŚ TU');
         console.log(region);
+
+        let newFlags = [];
+        console.log(allItems);
+        // console.log(items);
+        const newFilter = Object.keys(this.state.items).reduce((result, key) => {
+
+            // console.log(flags[key]['region']);
+            if (this.state.items[key]['region'] === region) {
+                // result.push(flags[key]);
+                newFlags.push(this.state.items[key]);
+            }
+            ;
+            // return result;
+
+        }, []);
+
+        return this.setFlags(newFlags);
+        console.log(newFlags);
+        //refreshFlags = res => this.setState({flags: newFlags});
+
+        // this.flags = newFlags;
+        // return new FlagList(newFlags);
+        // this.setState({
+        //         items: newFlags
+        //     }
+        // )
+
+    }
+
+    connect() {
+
     }
 
     render() {
@@ -93,13 +132,13 @@ export default class App extends React.Component {
 
 
                     <div className="dropdown" id="region-filter">
-                    <FilterRegion regions={regions} onSelectRegion={this.selRegion}></FilterRegion>
+                        <FilterRegion regions={this.state.regions} onSelectRegion={this.selRegion} items={this.state.items}></FilterRegion>
 
                     </div>
                 </div>
 
                 {/*<div id="flag-list-container"></div>*/}
-                <FlagList flags={flags}/>
+                <FlagList flags={this.state.flags}/>
 
             </div>
         );

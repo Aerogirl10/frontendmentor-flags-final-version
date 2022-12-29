@@ -13,12 +13,12 @@ class FlagList extends React.Component {
         super(props);
         console.log(props);
         console.log("props.flags");
-        console.log(props.flags);
+        console.log(this.props.flags);
 
 
         this.state = {
-            items: this.props.flags,
-            DataisLoaded: false,
+            flags: this.props.flags,
+            // DataisLoaded: false,
             // region: this.props.region
         };
     }

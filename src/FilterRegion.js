@@ -10,7 +10,7 @@ class FilterRegion extends React.Component {
         console.log(props);
 
         this.state = {
-            items: [],
+            items: this.props.items,
             DataisLoaded: false,
             regions: this.props.regions
         };
@@ -18,13 +18,15 @@ class FilterRegion extends React.Component {
 
     componentDidMount() {
         console.log("ładuj filtery");
-        console.log(this.regions);
+        console.log(this.props.regions);
         console.log(this.props);
     }
 
     handleClick = (e) => {
         var region = e.target.dataset.region;
-        this.props.onSelectRegion(region);
+        console.log("Filter");
+        console.log(this.state);
+        this.props.onSelectRegion(this.state.items, region);
     }
 
     render() {
