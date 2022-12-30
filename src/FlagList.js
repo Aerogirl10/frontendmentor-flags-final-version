@@ -1,11 +1,29 @@
 import ReactDOM from "react-dom/client";
 import React, {useState} from "react";
-import FilterRegion from "./FilterRegion";
-import {findAllByDisplayValue} from "@testing-library/react";
+import {
+    Route,
+    Routes,
+    Link,
+    BrowserRouter as Router,
+    Outlet,
+    createBrowserRouter,
+    createRoutesFromElements, RouterProvider
+} from 'react-router-dom'
+import Item from "./Item";
+import App from "./App";
+
+
 
 let regions = null;
 
 
+const router = createBrowserRouter(
+    createRoutesFromElements(
+
+            <Route path="dashboard" element={<Item />} />
+
+    )
+);
 class FlagList extends React.Component {
 
     constructor(props) {
@@ -77,6 +95,7 @@ class FlagList extends React.Component {
         //     DataisLoaded: true,
         // });
 
+
     }
 
     render() {
@@ -92,13 +111,39 @@ class FlagList extends React.Component {
             <div id="flag-list">
                 {
                     this.props.flags.map((item, index) => (
+
+
                         <div id={item.cca2} className="flag-item" key={index}>
+
+
+                           {/* <RouterProvider router={router} />
+
+
+                            <Outlet/>*/}
+
+                            {/*<Routes>
+                                <Route path={'/paaaa'} element={<Item/>}>
+
+                                </Route>
+                            </Routes>*/}
+
+                            <Router>
+                                <div>
+                                    {/*<NavBar />*/}
+                                    <Routes>
+                                        <Route exact path="/dashboard" component={<Item/>} />
+                                    </Routes>
+                                </div>
+                            </Router>
+
                             <div className="flag">
                                 <picture>
                                     <img src={item.flags.png} alt=""/>
                                 </picture>
                                 <div className="info">
                                     <h3>{item.name.common}</h3>
+                                    {/*<Link to='/dashboard'>???</Link>*/}
+
 
                                     <p><span><b>Population</b></span>: {item.population}</p>
                                     <p><span><b>Region</b></span>: {item.region}</p>
@@ -106,6 +151,7 @@ class FlagList extends React.Component {
                                 </div>
                             </div>
                         </div>
+
                     ))
                 }
             </div>

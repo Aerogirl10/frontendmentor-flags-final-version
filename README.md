@@ -1,3 +1,12 @@
+New npm doesn't work - cannot npm install, problem with node modules
+
+nvm use node 14
+npm install
+go
+
+iojs (use npm 2.9?)
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

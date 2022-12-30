@@ -8,51 +8,130 @@
   display: flex;
 }
 
-body
-{
-  background-color: vars.$dark-mode-bkg;
-  font-family: 'Inter', sans-serif;
-  font-family: 'Nunito Sans', sans-serif;
-  color: vars.$dark-txt-light-elems;
-}
 
-header
-{
-  background-color: vars.$dark-mode-elements;
-  padding: 20px 40px;
-  display: flex;
-  justify-content: space-between;
 
-  & > span
-  {
-    font-size: 25px;
-    font-weight: bold;
-  }
-
-  & button
-  {
-    background-color: transparent;
-    border: none;
-    color: vars.$dark-txt-light-elems;
-
-    & > i
-    {
-      margin-right: 10px;
-    }
-  }
-}
 
 #main
 {
   padding: 40px;
+  background-color: vars.$dark-mode-bkg;
+  font-family: 'Inter', sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
+  color: vars.$dark-txt-light-elems;
+
+  &.light
+  {
+    background-color: vars.$light-mode-bkg;
+    color: vars.$light-mode-txt;
+
+    & header
+    {
+      background-color: vars.$dark-txt-light-elems;
+      box-shadow: vars.$light-box-shadow;
+      color: vars.$light-mode-txt;
+      & button
+      {
+        color: vars.$light-mode-txt;
+      }
+    }
+
+    #search
+    {
+      background-color: vars.$dark-txt-light-elems;
+      color: vars.$light-mode-input;
+      box-shadow: vars.$light-box-shadow;
+    }
+
+
+
+    & .flag-item
+    {
+      background-color: vars.$dark-txt-light-elems;
+      box-shadow: vars.$light-box-shadow;
+
+    }
+
+    & .dropdown
+    {
+      background-color: vars.$dark-txt-light-elems;
+      box-shadow: vars.$light-box-shadow;
+
+      & .dropdown-content
+      {
+        background-color: vars.$dark-txt-light-elems;
+        color: vars.$light-mode-txt;
+
+        & > li
+        {
+          &:hover
+          {
+            background-color: vars.$light-mode-input;
+          }
+
+          &.active
+          {
+            background-color: vars.$light-mode-input;
+          }
+        }
+      }
+    }
+  }
+
+  header
+  {
+    background-color: vars.$dark-mode-elements;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    margin: -40px;
+    width: 100vw;
+    margin-bottom: 40px;
+
+    & > span
+    {
+      font-size: 1.5rem;
+      font-weight: bold;
+
+      @media (max-width: vars.$desktop)
+      {
+        font-size: 1rem;
+      }
+    }
+
+    & button
+    {
+      background-color: transparent;
+      border: none;
+      color: vars.$dark-txt-light-elems;
+
+      & > i
+      {
+        margin-right: 10px;
+      }
+    }
+  }
 
   & .flex
   {
     justify-content: space-between;
 
+    @media (max-width: vars.$desktop)
+    {
+      flex-wrap: wrap;
+    }
+
     & .input-group
     {
       position: relative;
+
+      @media(max-width: vars.$desktop){
+        width: 100%;
+
+        & input
+        {
+          width: 100%;
+        }
+      }
 
       & i
       {
@@ -81,7 +160,10 @@ header
 
     .dropdown {
       position: relative;
-      display: inline-block;
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+
     }
 
     .dropdown-content {
@@ -93,12 +175,18 @@ header
       box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
       z-index: 1;
       padding: 0;
+      top: 40px;
 
       & > li
       {
         list-style: none;
         padding: 10px 15px;
         &:hover
+        {
+          background-color: vars.$dark-mode-elements;
+        }
+
+        &.active
         {
           background-color: vars.$dark-mode-elements;
         }

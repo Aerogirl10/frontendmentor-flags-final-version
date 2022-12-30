@@ -10,9 +10,10 @@ class FilterRegion extends React.Component {
         console.log(props);
 
         this.state = {
-            items: this.props.items,
-            DataisLoaded: false,
-            regions: this.props.regions
+            // items: this.props.items,
+            // DataisLoaded: false,
+            regions: this.props.regions,
+            selRegion: null
         };
     }
 
@@ -26,7 +27,10 @@ class FilterRegion extends React.Component {
         var region = e.target.dataset.region;
         console.log("Filter");
         console.log(this.state);
-        this.props.onSelectRegion(this.state.items, region);
+        this.props.onSelectRegion(region);
+        this.setState({
+            selRegion: region
+        })
     }
 
     render() {
@@ -37,8 +41,9 @@ class FilterRegion extends React.Component {
             <>
                 <span>Filter by region <i className="fa-solid fa-chevron-down"></i></span>
                 <ul className="dropdown-content region-change">
+                    <li onClick={this.handleClick} data-region={"all"} key={-100}>All regions</li>
                     {this.props.regions.map((region, index) => (
-                        <li onClick={this.handleClick} data-region={region} key={index}>{region}</li>
+                        <li onClick={this.handleClick} data-region={region} key={index} className={(this.state.selRegion === region ? "active" : "")} >{region}</li>
                     ))
                     }
                 </ul>
@@ -50,11 +55,3 @@ class FilterRegion extends React.Component {
 export default FilterRegion;
 
 
-/*
-const domContainer = document.querySelector('#region-filter');
-//
-const root = ReactDOM.createRoot(domContainer);
-// root.render(<ShoppingList name="Mark"></ShoppingList>);
-root.render(<FilterRegion data={"testuje"}/>);*/
-
-// todo: try to remove it from here and trigger directly from index.js
